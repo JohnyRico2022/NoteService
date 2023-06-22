@@ -124,8 +124,13 @@ object NoteList {
         } else {
             false
         }
-
     }
+
+fun clear(){
+    noteCurrentId = 0
+    commentCurrenttId = 0
+    notesList = emptyList<Note>().toMutableList()
+}
 
 }
 

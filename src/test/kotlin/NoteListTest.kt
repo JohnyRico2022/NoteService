@@ -1,8 +1,14 @@
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before
 
 class NoteListTest {
+
+    @Before
+    fun clearBeforeTest(){
+        NoteList.clear()
+    }
 
     @Test
     fun add() {
@@ -81,9 +87,9 @@ class NoteListTest {
         service.add(note2)
         service.add(note3)
 
-        val result = service.getById(1)
+        val result = service.getById(3)
 
-        assertEquals(note1 , result)
+        assertEquals(note3 , result)
 
     }
 
@@ -100,7 +106,7 @@ class NoteListTest {
         service.add(note2)
         service.add(note3)
 
-     val result = service.createComment(note3, "Hello")
+     val result = service.createComment(note1, "Hello")
 
         assertEquals( comment,result)
     }
@@ -162,7 +168,7 @@ class NoteListTest {
         service.createComment(note3, "Hello")
         service.createComment(note3, "Hello2")
 
-        val result = service.restoreComment(note3,2)
+        val result = service.restoreComment(note3,1)
 
         assertEquals(true ,result)
     }
