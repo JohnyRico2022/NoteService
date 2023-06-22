@@ -1,0 +1,1 @@
+C:\Users\Acer\IdeaProjects\NoteService\build\classes\kotlin\main\Comment.class;C:\Users\Acer\IdeaProjects\NoteService\build\classes\kotlin\main\MainKt.class;C:\Users\Acer\IdeaProjects\NoteService\build\classes\kotlin\main\Note.class;C:\Users\Acer\IdeaProjects\NoteService\build\classes\kotlin\main\NoteList.class
