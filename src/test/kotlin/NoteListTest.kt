@@ -22,7 +22,6 @@ class NoteListTest {
         val result = note2
 
         assertEquals(note2, result)
-
     }
 
     @Test
@@ -30,11 +29,9 @@ class NoteListTest {
         val service = NoteList
         val note1 = Note("Title_1", "Text_1", userId = 55)
         val note2 = Note("Title_2", "Text_2", userId = 55)
-        val note3 = Note("Title_3", "Text_3", userId = 55)
 
         service.add(note1)
         service.add(note2)
-        service.add(note3)
 
         val result = service.delete(note1)
         assertEquals(false, result)
@@ -46,11 +43,9 @@ class NoteListTest {
         val service = NoteList
         val note1 = Note("Title_1", "Text_1", userId = 55)
         val note2 = Note("Title_2", "Text_2", userId = 55)
-        val note3 = Note("Title_3", "Text_3", userId = 55)
 
         service.add(note1)
         service.add(note2)
-        service.add(note3)
 
         val result = service.edit(2,"Test", "Test")
 
@@ -58,38 +53,34 @@ class NoteListTest {
 
     }
 
-  /*
+
    @Test
     fun get() {
         val service = NoteList
         val note1 = Note("Title_1", "Text_1", userId = 55)
         val note2 = Note("Title_2", "Text_2", userId = 55)
-        val note3 = Note("Title_3", "Text_3", userId = 55)
 
         service.add(note1)
         service.add(note2)
-        service.add(note3)
 
-        val result = service.get()
+        val result = service.get().isNullOrEmpty()
 
-        assertEquals(   , result)
+        assertEquals( false , result)
     }
-   */
+
 
     @Test
     fun getById() {
         val service = NoteList
         val note1 = Note("Title_1", "Text_1", userId = 55)
         val note2 = Note("Title_2", "Text_2", userId = 55)
-        val note3 = Note("Title_3", "Text_3", userId = 55)
 
         service.add(note1)
         service.add(note2)
-        service.add(note3)
 
-        val result = service.getById(3)
+        val result = service.getById(1)
 
-        assertEquals(note3 , result)
+        assertEquals(note1 , result)
 
     }
 
@@ -99,20 +90,31 @@ class NoteListTest {
         val service = NoteList
         val note1 = Note("Title_1", "Text_1", userId = 55)
         val note2 = Note("Title_2", "Text_2", userId = 55)
-        val note3 = Note("Title_3", "Text_3", userId = 55)
         val comment =Comment("Hello",1, false)
 
         service.add(note1)
         service.add(note2)
-        service.add(note3)
 
-     val result = service.createComment(note1, "Hello")
+        val result = service.createComment(note1, "Hello")
 
         assertEquals( comment,result)
     }
 
     @Test
     fun getComments() {
+        val service = NoteList
+        val note1 = Note("Title_1", "Text_1", userId = 55)
+        val note2 = Note("Title_2", "Text_2", userId = 55)
+
+        service.add(note1)
+        service.add(note2)
+        service.createComment(note1,"comment_1")
+        service.createComment(note1,"comment_2")
+        service.createComment(note2,"comment_3")
+
+        val result = service.getComments(note1).isNullOrEmpty()
+
+        assertEquals( false , result)
     }
 
     @Test
@@ -121,16 +123,14 @@ class NoteListTest {
         val service = NoteList
         val note1 = Note("Title_1", "Text_1", userId = 55)
         val note2 = Note("Title_2", "Text_2", userId = 55)
-        val note3 = Note("Title_3", "Text_3", userId = 55)
 
         service.add(note1)
         service.add(note2)
-        service.add(note3)
 
-        service.createComment(note3, "Hello")
-        service.createComment(note3, "Hello2")
+        service.createComment(note1, "Hello")
+        service.createComment(note1, "Hello2")
 
-        val result = service.editComment(note3,2,"test")
+        val result = service.editComment(note1,2,"test")
 
         assertEquals(true ,result)
     }
@@ -140,16 +140,14 @@ class NoteListTest {
         val service = NoteList
         val note1 = Note("Title_1", "Text_1", userId = 55)
         val note2 = Note("Title_2", "Text_2", userId = 55)
-        val note3 = Note("Title_3", "Text_3", userId = 55)
 
         service.add(note1)
         service.add(note2)
-        service.add(note3)
 
-        service.createComment(note3, "Hello")
-        service.createComment(note3, "Hello2")
+        service.createComment(note1, "Hello")
+        service.createComment(note1, "Hello2")
 
-        val result = service.deleteComment(note3,2)
+        val result = service.deleteComment(note1,2)
 
         assertEquals(true ,result)
     }
@@ -159,16 +157,15 @@ class NoteListTest {
         val service = NoteList
         val note1 = Note("Title_1", "Text_1", userId = 55)
         val note2 = Note("Title_2", "Text_2", userId = 55)
-        val note3 = Note("Title_3", "Text_3", userId = 55)
 
         service.add(note1)
         service.add(note2)
-        service.add(note3)
 
-        service.createComment(note3, "Hello")
-        service.createComment(note3, "Hello2")
+        service.createComment(note1, "Hello")
+        service.createComment(note1, "Hello2")
+        service.deleteComment(note1,1)
 
-        val result = service.restoreComment(note3,1)
+        val result = service.restoreComment(note1,1)
 
         assertEquals(true ,result)
     }

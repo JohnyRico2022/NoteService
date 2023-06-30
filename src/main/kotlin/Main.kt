@@ -34,32 +34,35 @@ object NoteList {
     fun delete(note: Note): Boolean {  //Удаляет заметку текущего пользователя.
 
         notesList.remove(note)
-
         return notesList.contains(note)
-
     }
 
-    fun edit(noteId: Int, title: String, text: String): Boolean {  //Редактирует заметку текущего пользователя.
+    fun edit(noteId: Int, title: String, text: String): Boolean { //Редактирует заметку текущего пользователя.
 
-        return if (noteId>0) {
-            notesList[noteId - 1].title = title
-            notesList[noteId - 1].text = text
-            true
-        } else {
-            false
+        for ((index: Int, noteNew: Note) in notesList.withIndex()) {
+            if (noteNew.noteId == noteId) {
+                notesList[index] = noteNew.copy(title = title, text = text)
+                return true
+            }
         }
-
+        return false
     }
 
-    fun get() {  //Возвращает список заметок, созданных пользователем.
+    fun get():MutableList<Note>? {  //Возвращает список заметок, созданных пользователем.
 
-        println(notesList)
+        if (notesList.size > 0){
+            return     notesList
+        }
+        return null
     }
 
-    fun getById(noteId: Int): Note {   //Возвращает заметку по её id.
+    fun getById(noteId: Int): Note? {   //Возвращает заметку по её id.
 
-         return notesList[noteId - 1]
-
+        for (newNote in notesList)
+            if (newNote.noteId == noteId) {
+                return newNote
+            }
+        return null
     }
 
     fun createComment(note: Note, message: String): Comment {  //Добавляет новый комментарий к заметке.
@@ -69,18 +72,16 @@ object NoteList {
         return note.comment.last()
     }
 
-    fun getComments(note: Note) { //Возвращает список комментариев к заметке.
+    fun getComments(note: Note): MutableList<Comment> { //Возвращает список комментариев к заметке.
 
         val commentList = note.comment
         var listOnlyFalse = emptyList<Comment>().toMutableList()
 
-        for (comments in commentList)
-            if (Comment().deletedComment == false) {
-                listOnlyFalse += comments
+        for (comment in commentList)
+            if (!comment.deletedComment) {
+                listOnlyFalse += comment
             }
-
-        val list = listOnlyFalse.joinToString(separator = " ; ")
-        println(list)
+        return listOnlyFalse
     }
 
     fun editComment(note: Note, commentId: Int, newMessage: String): Boolean { //Редактирует указанный комментарий у заметки.
@@ -93,7 +94,6 @@ object NoteList {
         } else {
             false
         }
-
     }
 
     fun deleteComment(note: Note, commentId: Int): Boolean {  //Удаляет комментарий к заметке.
@@ -111,7 +111,6 @@ object NoteList {
         }
     }
 
-
     fun restoreComment(note: Note, commentId: Int): Boolean { //Восстанавливает удалённый комментарий.
 
         val list = note.comment
@@ -126,12 +125,11 @@ object NoteList {
         }
     }
 
-fun clear(){
-    noteCurrentId = 0
-    commentCurrenttId = 0
-    notesList = emptyList<Note>().toMutableList()
-}
-
+    fun clear() {
+        noteCurrentId = 0
+        commentCurrenttId = 0
+        notesList = emptyList<Note>().toMutableList()
+    }
 }
 
 fun main() {
@@ -141,32 +139,14 @@ fun main() {
     val note2 = Note("Title_2", "Text_2", userId = 55)
     val note3 = Note("Title_3", "Text_3", userId = 55)
 
+
     service.add(note1)
     service.add(note2)
     service.add(note3)
+    service.createComment(note1,"comment_1")
+    service.createComment(note1,"comment_2")
+
     service.print()
-    println(service.delete(note1))
-    service.print()
-
-
-
-
-
-//    println(service.createComment(note3, "Hello"))
-//    service.createComment(note3, "Hello2")
-//    service.createComment(note2, "Hi")
-//    service.editComment(note3, 1,"new")
-//
-//    service.getComments(note3)
-//    service.deleteComment(note3,2)
-//    service.getComments(note3)
-//    service.restoreComment(note3,2)
-//    service.getComments(note3)
-//
-//    service.getById(1)
-//
-//    service.get()
-
 
 }
 

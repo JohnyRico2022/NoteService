@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="NoteListTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2023-06-22T20:06:30" hostname="LAPTOP-02331KQ1" time="0.012">
+<testsuite name="NoteListTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2023-06-30T20:23:53" hostname="LAPTOP-02331KQ1" time="0.011">
   <properties/>
   <testcase name="editComment" classname="NoteListTest" time="0.01"/>
   <testcase name="delete" classname="NoteListTest" time="0.0"/>
   <testcase name="createComment" classname="NoteListTest" time="0.0"/>
   <testcase name="getById" classname="NoteListTest" time="0.0"/>
   <testcase name="add" classname="NoteListTest" time="0.0"/>
+  <testcase name="get" classname="NoteListTest" time="0.0"/>
   <testcase name="edit" classname="NoteListTest" time="0.0"/>
   <testcase name="restoreComment" classname="NoteListTest" time="0.0"/>
   <testcase name="deleteComment" classname="NoteListTest" time="0.0"/>
-  <testcase name="getComments" classname="NoteListTest" time="0.001"/>
+  <testcase name="getComments" classname="NoteListTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
